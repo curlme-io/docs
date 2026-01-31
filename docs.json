@@ -16,7 +16,6 @@
           {
             "group": "Getting Started",
             "pages": [
-              "introduction",
               "quickstart",
               "concepts"
             ]
@@ -141,15 +140,5 @@
       "copy",
       "view"
     ]
-  },
-  "api": {
-    "baseUrl": "https://curlme.io",
-    "playground": {
-      "mode": "simple"
-    }
-  },
-  "footerSocials": {
-    "github": "https://github.com/curlme-io",
-    "x": "https://x.com/curlmeio"
   }
 }
