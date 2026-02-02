@@ -1,0 +1,57 @@
+---
+title: "Inspect HTTP requests from the terminal"
+description: "A professional guide to real-time request inspection using the curlme CLI."
+---
+
+## Overview
+
+Inspection is the core of debugging. When a request fails, you need to know exactly what was sent: headers, query parameters, and the raw body. 
+
+curlme turns your terminal into a live request logger.
+
+## Getting Started
+
+### 1. Initialize your environment
+```bash
+curlme bin create debug-session
+```
+
+### 2. Live Inspection
+Run the listen command to see requests in real-time.
+```bash
+curlme listen
+```
+
+## Anatomy of an Inspection
+
+When a request arrives, curlme provides:
+- **Timestamp**: When the request hit our servers.
+- **Method & Path**: The HTTP Verb and the specific URI.
+- **Headers**: Complete header list (including user agents, auth tokens, etc.).
+- **Body**: Automatically formatted JSON or raw text.
+
+## Useful Patterns
+
+### Filtering by Method
+Only interested in `POST` requests?
+```bash
+curlme listen --method POST
+```
+
+### Inspecting the Latest Request
+If you missed the stream, just grab the most recent one:
+```bash
+curlme latest
+```
+
+### Deep Dive into a Specific Request
+Use a request ID for full details:
+```bash
+curlme show rq_a1b2c3
+```
+
+## Keep it Terminal-First
+The goal of curlme is to keep your tooling close to your code. By inspecting HTTP traffic in the terminal, you can easily pipe output to other commands, grep for specific keys, or log results to local files.
+
+---
+*Terminal-first HTTP request debugging.*

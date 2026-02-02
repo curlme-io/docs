@@ -1,0 +1,40 @@
+---
+title: "Get Bin Logs"
+openapi: "GET /api/bins/{binId}/logs"
+description: "Retrieve activity logs for a specific bin"
+---
+
+## Overview
+
+Use this endpoint to see the history of changes and actions related to a specific bin, such as settings updates or clearance of requests.
+
+## Arguments
+
+<ParamField path="binId" type="string" required>
+  The bin's public ID or internal ID
+</ParamField>
+
+## Response
+
+Returns a list of audit log entries targeted at this bin.
+
+<ResponseField name="id" type="string">
+  Unique ID of the log entry
+</ResponseField>
+
+<ResponseField name="action" type="string">
+  The action performed (e.g., `UPDATE_BIN_SETTINGS`, `CLEAR_REQUESTS`)
+</ResponseField>
+
+<ResponseField name="timestamp" type="string">
+  When the action occurred
+</ResponseField>
+
+## Examples
+
+<CodeGroup>
+```bash cURL
+curl https://curlme.io/api/bins/abc123xyz/logs \
+  -H "x-api-key: cm_your_api_key"
+```
+</CodeGroup>

@@ -1,0 +1,40 @@
+---
+title: "Manage Connections"
+openapi: "DELETE /api/user/connections/{provider}"
+description: "Manage and disconnect social authentication providers"
+---
+
+## Overview
+
+Disconnect a social authentication provider (Google, GitHub, etc.) from your account. 
+
+<Warning>
+  You cannot disconnect your only authentication method. You must have at least one other way to sign in.
+</Warning>
+
+## Arguments
+
+<ParamField path="provider" type="string" required>
+  The provider to disconnect (e.g., `google`, `github`)
+</ParamField>
+
+## Examples
+
+<CodeGroup>
+```bash cURL
+curl -X DELETE https://curlme.io/api/user/connections/google \
+  -H "x-api-key: cm_your_api_key"
+```
+</CodeGroup>
+
+### Response Body
+
+```json
+{
+  "success": true
+}
+```
+
+## List Connections
+
+To see your current connections, use the [Get Profile](/api/user/me) endpoint which includes a list of linked providers.

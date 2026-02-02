@@ -28,6 +28,17 @@ description: "Update bin settings and configuration"
   Set a new password. Empty string removes protection.
 </ParamField>
 
+<ParamField body="rules" type="array">
+  Conditional response rules. See [Response Rules](/features/response-rules) for details.
+  <Expandable title="Rule object">
+    <ParamField body="name" type="string">Rule name</ParamField>
+    <ParamField body="enabled" type="boolean">Whether rule is active</ParamField>
+    <ParamField body="priority" type="number">Execution priority (lower first)</ParamField>
+    <ParamField body="conditions" type="object">Match conditions</ParamField>
+    <ParamField body="response" type="object">Response to return if matched</ParamField>
+  </Expandable>
+</ParamField>
+
 <ParamField body="customResponse" type="object">
   Default response configuration
   <Expandable>

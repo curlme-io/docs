@@ -74,6 +74,18 @@ bin = response.json()
   Timestamp of most recent request
 </ResponseField>
 
+<ResponseField name="retentionHours" type="number">
+  Request retention period (0 = indefinite)
+</ResponseField>
+
+<ResponseField name="passwordProtected" type="boolean">
+  Whether bin is password protected
+</ResponseField>
+
+<ResponseField name="redactionRules" type="array">
+  Configuration for redacting sensitive request data
+</ResponseField>
+
 <ResponseField name="customResponse" type="object">
   Default response configuration
   <Expandable>

@@ -1,0 +1,44 @@
+---
+title: "Update Labels"
+openapi: "PATCH /api/bins/{binId}/requests"
+description: "Assign labels to a specific request for categorization"
+---
+
+## Arguments
+
+<ParamField path="binId" type="string" required>
+  The bin's public ID or internal ID
+</ParamField>
+
+<ParamField body="requestId" type="string" required>
+  The ID of the request to label
+</ParamField>
+
+<ParamField body="labels" type="array" items="string" required>
+  An array of strings to use as labels
+</ParamField>
+
+## Examples
+
+<CodeGroup>
+```bash cURL
+curl -X PATCH https://curlme.io/api/bins/abc123xyz/requests \
+  -H "x-api-key: cm_your_api_key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "requestId": "rq_f8a3b2",
+    "labels": ["stripe", "important", "investigating"]
+  }'
+```
+</CodeGroup>
+
+### Response Body
+
+```json
+{
+  "id": "rq_f8a3b2",
+  "binId": "abc123xyz",
+  "labels": ["stripe", "important", "investigating"],
+  ...
+}
+```

@@ -1,0 +1,41 @@
+---
+title: "A terminal-first alternative to RequestBin"
+description: "How curlme compares to traditional request capture tools like RequestBin and Webhook.site."
+---
+
+## Overview
+
+Tools like RequestBin and Webhook.site pioneered the "throwaway endpoint" concept. They are excellent for quick visual checks or when you need a public URL to receive a one-off payload.
+
+However, for developers building and debugging APIs, the dashboard-centric model introduces friction.
+
+## Where Traditional Tools Break Down
+
+1. **Context Switching**: You spend more time in your browser than in your code.
+2. **Manual Replay**: To test a fix, you often have to manually copy data into `curl` or Postman.
+3. **Transient Data**: Many free versions of these tools don't offer persistent storage or easy sharing within teams without upgrade paths.
+
+## When curlme is a Better Fit
+
+**curlme** is built for developers who live in the terminal.
+
+- **You want to stay in your IDE**: Run `curlme listen` in a side terminal and watch traffic while you code.
+- **You need to local-test**: Use `curlme replay` to forward captured production traffic to `localhost:3000` with one command.
+- **You need to compare**: Built-in `diff` commands let you see exactly what changed between two webhook versions.
+
+## When it's Not a Fit
+
+To be honest, curlme might not be for everyone:
+- If you need a **rich visual editor** to build complex JSON payloads, a dashboard-first tool might be better.
+- If you are a **non-technical user** who just needs to see if a link was clicked, the terminal interface might feel unnecessary.
+
+## Comparison at a Glance
+
+| Feature | RequestBin / Others | curlme |
+| :--- | :--- | :--- |
+| **Primary Interface** | Web Dashboard | CLI (Terminal) |
+| **Workflow** | Capture → View → Copy → Replay | Capture → Listen → Replay |
+| **Local Testing** | Requires manual setup | Integrated `replay` command |
+| **Philosophy** | Visualization first | Speed and terminal-native |
+
+If you find yourself constantly copying headers from a browser tab into your terminal, curlme was built for you.

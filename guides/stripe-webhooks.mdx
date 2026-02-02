@@ -1,0 +1,42 @@
+---
+title: "Debugging a Stripe webhook with curlme"
+description: "A step-by-step workflow for verifying Stripe event signatures and payloads."
+---
+
+Stripe webhooks are notorious for being tricky to debug due to signature verification and complex JSON structures. Here is how you debug them efficiently using curlme.
+
+## 1. Create a Stripe Bin
+Start by creating a dedicated bin for your Stripe events.
+```bash
+curlme bin create stripe-test
+```
+
+## 2. Configure Stripe
+Go to your Stripe Dashboard and add a new webhook endpoint.
+- **URL**: `https://curlme.io/h/stripe-test`
+- **Events**: `payment_intent.succeeded` (or any event you're testing)
+
+## 3. Listen for the Event
+In your terminal, start listening:
+```bash
+curlme listen
+```
+
+## 4. Trigger the Webhook
+Fire a test event from Stripe. You'll see the request appear in your terminal immediately.
+```
+→ POST /h/stripe-test [200] rq_f8a3b2
+```
+
+## 5. Verify and Replay
+Check the headers to find the `Stripe-Signature`. If your local code is failing signature verification, you can now:
+1. Inspect the raw body with `curlme show rq_f8a3b2`.
+2. Start your local server.
+3. Replay the request to your local endpoint:
+```bash
+curlme replay rq_f8a3b2 --to http://localhost:3000/api/webhooks/stripe
+```
+
+This ensures you are testing with the exact payload and headers Stripe sent, without having to repeatedly trigger events from their dashboard.
+
+**This is where curlme helps**: It bridges the gap between Stripe's cloud and your local terminal.

@@ -39,28 +39,38 @@ flowchart TD
 
 ### Via API
 
+Response rules are updated by patching the bin configuration.
+
 ```bash
-curl -X POST https://curlme.io/api/bins/abc123/rules \
+curl -X PATCH https://curlme.io/api/bins/abc123xyz \
   -H "x-api-key: cm_your_api_key" \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "Auth Error",
-    "enabled": true,
-    "priority": 1,
-    "conditions": {
-      "header": {
-        "key": "authorization",
-        "value": ""
+    "rules": [
+      {
+        "name": "Auth Error",
+        "enabled": true,
+        "priority": 1,
+        "conditions": {
+          "header": {
+            "key": "authorization",
+            "value": ""
+          }
+        },
+        "response": {
+          "statusCode": 401,
+          "headers": {},
+          "body": "{\"error\": \"unauthorized\"}",
+          "contentType": "application/json"
+        }
       }
-    },
-    "response": {
-      "statusCode": 401,
-      "headers": {},
-      "body": "{\"error\": \"unauthorized\"}",
-      "contentType": "application/json"
-    }
+    ]
   }'
 ```
+
+<Warning>
+  When updating rules via API, the `rules` array you provide replaces all existing rules for that bin.
+</Warning>
 
 ## Rule Structure
 

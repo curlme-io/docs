@@ -1,0 +1,42 @@
+---
+title: "Get Usage"
+openapi: "GET /api/user/usage"
+description: "Retrieve current request usage and monthly limits"
+---
+
+## Overview
+
+Use this endpoint to monitor your current usage against your plan's limits. Usage is tracked on a monthly basis.
+
+## Response
+
+<ResponseField name="count" type="number">
+  The number of requests captured in the current month
+</ResponseField>
+
+<ResponseField name="limit" type="number">
+  The monthly request limit for your current plan
+</ResponseField>
+
+<ResponseField name="plan" type="string">
+  Your current plan level (`FREE`, `PRO`, or `ENTERPRISE`)
+</ResponseField>
+
+## Examples
+
+<CodeGroup>
+```bash cURL
+curl https://curlme.io/api/user/usage \
+  -H "x-api-key: cm_your_api_key"
+```
+</CodeGroup>
+
+### Response Body
+
+```json
+{
+  "count": 450,
+  "limit": 1000,
+  "plan": "FREE"
+}
+```

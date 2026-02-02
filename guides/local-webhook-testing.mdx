@@ -1,0 +1,46 @@
+---
+title: "Test webhooks locally without tunnels or dashboards"
+description: "Debugging local endpoints using request capture and CLI replay."
+---
+
+## The "Tunnel Exhaustion" Problem
+
+Tools like ngrok are standard for exposing local servers to the internet. However, they can be complex to configure for complex shared environments, and they don't always give you a historical record of what was sent.
+
+If you don't need a live persistent tunnel, there is a faster way.
+
+## Capture First, Replay Second
+
+Instead of exposing your local machine, use curlme as a buffer. 
+
+1. **Capture**: Point your webhook provider (Stripe, GitHub, etc.) to a curlme bin.
+2. **Inspect**: Verify the request structure in your terminal with `curlme listen`.
+3. **Replay**: Send that exact request to your local server whenever you're ready.
+
+## Workflow Example
+
+### 1. Set up the capture point
+```bash
+# Create a new bin
+curlme bin create dev-capture
+```
+*Configure your service to send webhooks to `https://curlme.io/h/dev-capture`.*
+
+### 2. Stream and Inspect
+```bash
+curlme listen
+```
+Watch the traffic come in. If a request looks problematic, note its ID (e.g., `rq_f8a3b2`).
+
+### 3. Replay to Localhost
+When you've started your local development server on port 3000:
+```bash
+curlme replay rq_f8a3b2 --to http://localhost:3000/api/webhook
+```
+
+## Why this works
+- **No public exposure**: You don't need to keep a tunnel open to the internet.
+- **Repeatable**: You can replay the same request 100 times while fixing a bug.
+- **Disconnected**: You can capture requests on the go and replay them later when you're back at your desk.
+
+This approach targets the pain of managing tunnels without competing directly—it's about adding a persistent, inspectable layer to your local dev flow.

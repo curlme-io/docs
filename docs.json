@@ -21,6 +21,18 @@
             ]
           },
           {
+            "group": "Guides",
+            "pages": [
+              "guides/debug-webhooks",
+              "guides/requestbin-alternative",
+              "guides/local-webhook-testing",
+              "guides/inspect-http-requests",
+              "guides/stripe-webhooks",
+              "guides/replaying-locally",
+              "guides/diffing-payloads"
+            ]
+          },
+          {
             "group": "Features",
             "pages": [
               "features/bins",
@@ -74,14 +86,17 @@
               "api/bins/create",
               "api/bins/get",
               "api/bins/update",
-              "api/bins/delete"
+              "api/bins/delete",
+              "api/bins/logs"
             ]
           },
           {
             "group": "Requests",
             "pages": [
               "api/requests/list",
-              "api/requests/webhook"
+              "api/requests/webhook",
+              "api/requests/comments",
+              "api/requests/labels"
             ]
           },
           {
@@ -91,14 +106,17 @@
               "api/organizations/create",
               "api/organizations/get",
               "api/organizations/update",
-              "api/organizations/delete"
+              "api/organizations/delete",
+              "api/organizations/audit"
             ]
           },
           {
             "group": "User",
             "pages": [
               "api/user/me",
-              "api/user/keys"
+              "api/user/keys",
+              "api/user/usage",
+              "api/user/connections"
             ]
           }
         ]

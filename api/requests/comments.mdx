@@ -1,0 +1,45 @@
+---
+title: "Add Comment"
+openapi: "POST /api/bins/{binId}/requests"
+description: "Add a comment to a specific request"
+---
+
+## Arguments
+
+<ParamField path="binId" type="string" required>
+  The bin's public ID or internal ID
+</ParamField>
+
+<ParamField body="requestId" type="string" required>
+  The ID of the request to comment on (e.g., `rq_f8a3b2`)
+</ParamField>
+
+<ParamField body="content" type="string" required>
+  The text content of the comment
+</ParamField>
+
+## Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST https://curlme.io/api/bins/abc123xyz/requests \
+  -H "x-api-key: cm_your_api_key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "requestId": "rq_f8a3b2",
+    "content": "Investigation: this looks like a duplicate event from Stripe."
+  }'
+```
+</CodeGroup>
+
+### Response Body
+
+```json
+{
+  "id": "cm_abc123",
+  "requestId": "rq_f8a3b2",
+  "userId": "usr_456",
+  "content": "Investigation: this looks like a duplicate event from Stripe.",
+  "createdAt": "2026-02-01T23:54:46.000Z"
+}
+```

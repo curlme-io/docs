@@ -1,0 +1,37 @@
+---
+title: "Diffing webhook payloads during a breaking change"
+description: "How to compare two requests to identify schema changes or regression bugs."
+---
+
+Upgrading an API or changing a webhook schema is dangerous. Small changes in field names or data types can break downstream consumers. Visual diffing is the fastest way to spot these changes.
+
+## The Scenario
+
+You have an existing webhook (`rq_old`) and a new version (`rq_new`) after an update. You need to see exactly what changed.
+
+## The CLI Workflow
+
+### 1. Identify the requests
+List your recent requests to find the two you want to compare.
+```bash
+curlme listen
+```
+
+### 2. Run the diff
+Compare them directly in your terminal.
+```bash
+curlme diff rq_old rq_new
+```
+
+### 3. Analyze the output
+The CLI will highlight:
+- **Added fields**: Green (`+`)
+- **Removed fields**: Red (`-`)
+- **Modified values**: Yellow
+
+## Why this matters
+- **Regression testing**: Verify that an update didn't accidentally drop a field.
+- **Collaborative debugging**: Share a diff with a teammate to explain why a specific integration is failing.
+- **Precision**: Moving beyond "it looks the same" to knowing exactly which byte changed.
+
+**This is where curlme helps**: It brings visual precision to terminal-first workflows.

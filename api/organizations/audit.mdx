@@ -1,0 +1,71 @@
+---
+title: "List Audit Logs"
+openapi: "GET /api/organizations/{orgId}/audit"
+description: "Retrieve audit logs for an organization to track member activity"
+---
+
+## Arguments
+
+<ParamField path="orgId" type="string" required>
+  The organization's ID
+</ParamField>
+
+## Response
+
+Returns a list of audit log entries.
+
+<ResponseField name="id" type="string">
+  Unique ID of the log entry
+</ResponseField>
+
+<ResponseField name="userId" type="string">
+  The user who performed the action
+</ResponseField>
+
+<ResponseField name="action" type="string">
+  The action performed (e.g., `UPDATE_BIN_SETTINGS`, `INVITE_MEMBER`)
+</ResponseField>
+
+<ResponseField name="targetType" type="string">
+  The type of resource affected (`BIN`, `ORGANIZATION`, `MEMBER`)
+</ResponseField>
+
+<ResponseField name="targetId" type="string">
+  The ID of the resource affected
+</ResponseField>
+
+<ResponseField name="timestamp" type="string">
+  When the action occurred
+</ResponseField>
+
+<ResponseField name="details" type="object">
+  Additional data about the change
+</ResponseField>
+
+## Examples
+
+<CodeGroup>
+```bash cURL
+curl https://curlme.io/api/organizations/org_abc123/audit \
+  -H "x-api-key: cm_your_api_key"
+```
+</CodeGroup>
+
+### Response Body
+
+```json
+[
+  {
+    "id": "log_789",
+    "organizationId": "org_abc123",
+    "userId": "usr_456",
+    "action": "UPDATE_BIN_SETTINGS",
+    "targetType": "BIN",
+    "targetId": "bin_xyz",
+    "timestamp": "2026-01-31T20:16:00.000Z",
+    "details": {
+      "name": "New Bin Name"
+    }
+  }
+]
+```

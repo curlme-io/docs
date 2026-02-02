@@ -1,0 +1,30 @@
+---
+title: "Replaying production requests locally"
+description: "How to safely move request data from production to development for debugging."
+---
+
+When a bug only happens in production, the first step is always trying to reproduce it locally. Context switching between production logs and local environments is a major source of friction.
+
+## The Workflow
+
+### 1. Capture the issue
+Keep a "production-debug" bin active and point a portion of your traffic or a specific hook toward it.
+```bash
+curlme bin use production-debug
+```
+
+### 2. Identify the failure
+Use the dashboard or `curlme listen` to find the specific request that caused the error. Let's say it's `rq_990011`.
+
+### 3. Bring it home
+Instead of manually copying the JSON body and headers into a `curl` command, use the replay feature.
+```bash
+curlme replay rq_990011 --to http://localhost:8080/debug
+```
+
+## Why it's more reliable
+- **No data loss**: Manually copying can lead to character encoding issues or missing hidden headers.
+- **Consistent environment**: Replaying through curlme ensures the `Content-Type` and other crucial metadata remain identical to the original delivery.
+- **Speed**: You can replay a request in seconds, keeping your focus on the code fix.
+
+**This is where curlme helps**: It makes production payloads as accessible as local ones.

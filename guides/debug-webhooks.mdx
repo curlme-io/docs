@@ -1,0 +1,47 @@
+---
+title: "Debug webhooks without leaving your terminal"
+description: "Why switching to a dashboard slows down your development loop, and how to stay in the terminal."
+---
+
+## The Webhook Debugging Loop
+
+Traditional webhook debugging often looks like this:
+1. Trigger an event in an external service (e.g., Stripe, GitHub).
+2. Switch to a browser tab.
+3. Refresh a dashboard to see if the request arrived.
+4. Copy the payload.
+5. Paste it into a local script or tool.
+6. Make a change, and repeat.
+
+Every time you switch context from your IDE to a browser, you lose focus.
+
+## Why Dashboards Slow You Down
+
+Dashboards are great for visualization, but they are a bottleneck for development. They require manual interaction, UI navigation, and copying/pasting. 
+
+**curlme** is designed to keep you in the terminal.
+
+## How curlme Fits Your Flow
+
+Instead of a browser-based dashboard, use the CLI to create an endpoint and listen for traffic instantly.
+
+### 1. Create a Bin
+```bash
+curlme bin create my-webhook
+```
+
+### 2. Listen in Real-time
+```bash
+curlme listen
+```
+
+As soon as a request hits your endpoint, the CLI displays the headers and body. You can inspect the data, replay it to a local server, or diff it with a previous request—all without touching your mouse.
+
+## CLI-First Efficiency
+
+- **Instant Visibility**: No refreshing; requests stream directly to your stdout.
+- **Interactive Inspection**: Use keyboard shortcuts to drill into payloads.
+- **Zero Infrastructure**: No need to configure tunnels or permanent servers for a 5-minute debug session.
+
+---
+*Capture, inspect, replay, and diff HTTP requests directly from your terminal.*
